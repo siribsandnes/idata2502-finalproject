@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        users: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Terraform Setup
-        users: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Format
         run: terraform fmt
