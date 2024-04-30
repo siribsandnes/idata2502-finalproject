@@ -18,3 +18,7 @@ module "backend" {
     bucket_name = var.bucket_name
     table_name = var.table_name
 }
+
+output "iam_user_name" {
+  value = module.backend.iam_user_arn
+}
