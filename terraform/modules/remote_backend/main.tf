@@ -1,6 +1,6 @@
 # IAM User for Terraform
 resource "aws_iam_user" "terraform_user" {
-  name = variable.iam_user_name
+  name = var.iam_user_name
 }
 
 # Attach AdministratorAccess policy to the IAM user
@@ -11,14 +11,14 @@ resource "aws_iam_user_policy_attachment" "admin_policy_attachment" {
 
 # S3 Bucket for Terraform state
 resource "aws_s3_bucket" "terraform_state_bucket" {
-  bucket = variable.bucket_name
+  bucket = var.bucket_name
 
   lifecycle {
     prevent_destroy = true
   }
 
   tags = {
-    Name    = variable.bucket_name
+    Name = var.bucket_name
   }
 }
 
@@ -60,12 +60,12 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
 
 # DynamoDB Table for state locking
 resource "aws_dynamodb_table" "state_lock_table" {
-  name         = variable.table_name
+  name         = var.table_name
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
 
   attribute {
-    name = LockID"
+    name = "LockID"
     type = "S"
   }
 
@@ -74,6 +74,6 @@ resource "aws_dynamodb_table" "state_lock_table" {
   }
 
   tags = {
-    Name    = variable.table_name
+    Name = var.table_name
   }
 }
